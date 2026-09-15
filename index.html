@@ -1,0 +1,759 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#070b14">
+<meta name="description" content="Hemasri — 3rd year CSE student, developer and technology enthusiast.">
+<title>Hemasri | 3D Developer Portfolio</title>
+
+<style>
+/* =========================================================
+   HEMASRI — PREMIUM 3D PORTFOLIO
+   Single-file HTML | GitHub Pages ready | No frameworks
+   ========================================================= */
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&display=swap');
+
+:root{
+  --bg:#050810;
+  --bg2:#090e1a;
+  --card:rgba(13,20,35,.72);
+  --card2:rgba(18,27,47,.58);
+  --text:#f4f7ff;
+  --muted:#9aa8bd;
+  --line:rgba(255,255,255,.10);
+  --accent:#65e7ff;
+  --accent2:#8b7cff;
+  --accent3:#c879ff;
+  --success:#69f5b0;
+  --shadow:0 25px 80px rgba(0,0,0,.45);
+  --radius:26px;
+  --max:1180px;
+}
+
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  font-family:Inter,Arial,sans-serif;
+  color:var(--text);
+  background:
+    radial-gradient(circle at 10% 10%,rgba(101,231,255,.09),transparent 28%),
+    radial-gradient(circle at 85% 20%,rgba(139,124,255,.12),transparent 28%),
+    radial-gradient(circle at 50% 90%,rgba(200,121,255,.08),transparent 35%),
+    var(--bg);
+  overflow-x:hidden;
+  cursor:none;
+}
+body:before{
+  content:"";
+  position:fixed;inset:0;pointer-events:none;z-index:-1;
+  background-image:
+    linear-gradient(rgba(255,255,255,.018) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(255,255,255,.018) 1px,transparent 1px);
+  background-size:60px 60px;
+  mask-image:linear-gradient(to bottom,black,transparent 90%);
+}
+a{color:inherit;text-decoration:none}
+button{font:inherit}
+::selection{background:var(--accent);color:#061018}
+
+/* Cursor */
+.cursor,.cursor-dot{
+  position:fixed;top:0;left:0;pointer-events:none;z-index:9999;
+  transform:translate(-50%,-50%);
+}
+.cursor{
+  width:34px;height:34px;border:1px solid rgba(101,231,255,.65);
+  border-radius:50%;transition:width .25s,height .25s,border-color .25s;
+}
+.cursor-dot{width:5px;height:5px;background:var(--accent);border-radius:50%}
+.cursor.active{width:58px;height:58px;border-color:var(--accent2);background:rgba(101,231,255,.05)}
+
+/* Progress */
+#scrollProgress{
+  position:fixed;top:0;left:0;width:0;height:3px;
+  background:linear-gradient(90deg,var(--accent),var(--accent2),var(--accent3));
+  z-index:10000;box-shadow:0 0 18px var(--accent);
+}
+
+/* Navigation */
+.nav{
+  position:fixed;top:18px;left:50%;transform:translateX(-50%);
+  width:min(calc(100% - 32px),1100px);z-index:1000;
+  padding:12px 16px;border:1px solid var(--line);
+  background:rgba(5,8,16,.65);backdrop-filter:blur(20px);
+  border-radius:20px;box-shadow:0 12px 45px rgba(0,0,0,.22);
+}
+.nav-inner{display:flex;align-items:center;justify-content:space-between;gap:20px}
+.logo{font-family:"Space Grotesk";font-weight:700;font-size:1.15rem;letter-spacing:-.04em}
+.logo span{color:var(--accent)}
+.nav-links{display:flex;gap:6px;list-style:none}
+.nav-links a{
+  padding:9px 12px;color:var(--muted);font-size:.86rem;border-radius:12px;
+  transition:.25s;
+}
+.nav-links a:hover,.nav-links a.active{color:var(--text);background:rgba(255,255,255,.07)}
+.menu-btn{display:none;background:none;border:0;color:var(--text);font-size:1.5rem;cursor:pointer}
+
+/* Layout */
+.container{width:min(calc(100% - 40px),var(--max));margin:auto}
+section{padding:115px 0;position:relative}
+.section-head{display:flex;justify-content:space-between;align-items:end;gap:25px;margin-bottom:45px}
+.eyebrow{
+  color:var(--accent);font-size:.76rem;text-transform:uppercase;letter-spacing:.22em;
+  font-weight:700;margin-bottom:12px;
+}
+h2{
+  font-family:"Space Grotesk";font-size:clamp(2rem,5vw,3.8rem);
+  line-height:.98;letter-spacing:-.055em;
+}
+.section-copy{max-width:470px;color:var(--muted);line-height:1.75}
+
+/* Hero */
+.hero{min-height:100vh;padding-top:160px;display:grid;place-items:center;perspective:1200px}
+.hero-grid{
+  display:grid;grid-template-columns:1.1fr .9fr;align-items:center;gap:70px;
+}
+.kicker{
+  display:inline-flex;align-items:center;gap:9px;padding:8px 12px;
+  border:1px solid var(--line);border-radius:999px;background:rgba(255,255,255,.035);
+  color:#cbd5e6;font-size:.78rem;margin-bottom:25px;
+}
+.kicker i{width:7px;height:7px;border-radius:50%;background:var(--success);box-shadow:0 0 12px var(--success)}
+.hero h1{
+  font-family:"Space Grotesk";font-size:clamp(3.3rem,8vw,7.2rem);
+  line-height:.86;letter-spacing:-.075em;max-width:800px;
+}
+.hero h1 .gradient{
+  background:linear-gradient(100deg,var(--text),var(--accent),var(--accent2));
+  -webkit-background-clip:text;background-clip:text;color:transparent;
+}
+.hero-text{color:var(--muted);max-width:600px;line-height:1.8;margin:27px 0 30px;font-size:1.02rem}
+.cta-row{display:flex;flex-wrap:wrap;gap:12px}
+.btn{
+  display:inline-flex;align-items:center;justify-content:center;gap:9px;
+  min-height:48px;padding:0 18px;border-radius:14px;border:1px solid var(--line);
+  background:rgba(255,255,255,.045);color:var(--text);cursor:pointer;
+  transition:transform .3s,background .3s,border-color .3s,box-shadow .3s;
+}
+.btn:hover{transform:translateY(-4px);background:rgba(255,255,255,.09);border-color:rgba(101,231,255,.35);box-shadow:0 12px 35px rgba(0,0,0,.25)}
+.btn.primary{background:linear-gradient(135deg,var(--accent),#7b8cff);color:#041017;border:0;font-weight:800}
+.btn.primary:hover{box-shadow:0 12px 35px rgba(101,231,255,.2)}
+.mini-stats{display:flex;gap:28px;margin-top:38px}
+.mini-stats strong{display:block;font-family:"Space Grotesk";font-size:1.45rem}
+.mini-stats span{font-size:.74rem;color:var(--muted)}
+
+/* 3D Hero Object */
+.scene{height:540px;display:grid;place-items:center;perspective:1100px}
+.orb{
+  position:absolute;width:360px;height:360px;border-radius:50%;
+  background:radial-gradient(circle at 35% 30%,rgba(101,231,255,.5),rgba(101,231,255,.06) 35%,transparent 65%);
+  filter:blur(2px);animation:pulse 5s ease-in-out infinite;
+}
+.cube-wrap{width:300px;height:300px;position:relative;transform-style:preserve-3d;animation:float 6s ease-in-out infinite}
+.cube{
+  width:220px;height:220px;position:absolute;left:40px;top:40px;
+  transform-style:preserve-3d;animation:spin 18s linear infinite;
+}
+.face{
+  position:absolute;inset:0;border:1px solid rgba(101,231,255,.4);
+  background:linear-gradient(135deg,rgba(101,231,255,.08),rgba(139,124,255,.07));
+  box-shadow:inset 0 0 35px rgba(101,231,255,.06),0 0 25px rgba(101,231,255,.05);
+  backdrop-filter:blur(4px);
+}
+.front{transform:translateZ(110px)}
+.back{transform:rotateY(180deg) translateZ(110px)}
+.right{transform:rotateY(90deg) translateZ(110px)}
+.left{transform:rotateY(-90deg) translateZ(110px)}
+.top{transform:rotateX(90deg) translateZ(110px)}
+.bottom{transform:rotateX(-90deg) translateZ(110px)}
+.cube-label{
+  position:absolute;inset:0;display:grid;place-items:center;text-align:center;
+  transform:translateZ(112px);font-family:"Space Grotesk";font-weight:700;
+  font-size:1.3rem;letter-spacing:.08em;
+}
+.floating-tag{
+  position:absolute;padding:10px 13px;border:1px solid var(--line);
+  background:rgba(8,13,24,.75);backdrop-filter:blur(12px);border-radius:13px;
+  font-size:.75rem;color:#cbd5e6;box-shadow:var(--shadow);
+}
+.tag1{top:13%;left:3%;animation:float2 4.2s ease-in-out infinite}
+.tag2{right:0;top:30%;animation:float2 5s .6s ease-in-out infinite}
+.tag3{bottom:14%;left:10%;animation:float2 4.8s 1s ease-in-out infinite}
+
+/* About */
+.about-grid{display:grid;grid-template-columns:.85fr 1.15fr;gap:35px}
+.glass{
+  border:1px solid var(--line);background:linear-gradient(145deg,rgba(255,255,255,.055),rgba(255,255,255,.018));
+  border-radius:var(--radius);box-shadow:var(--shadow);overflow:hidden;
+}
+.about-card{padding:34px}
+.about-card p{color:var(--muted);line-height:1.85;margin-bottom:20px}
+.profile-card{min-height:420px;display:grid;place-items:center;position:relative;overflow:hidden}
+.profile-ring{
+  width:230px;height:230px;border-radius:50%;border:1px solid rgba(101,231,255,.5);
+  display:grid;place-items:center;position:relative;
+  box-shadow:0 0 80px rgba(101,231,255,.08),inset 0 0 50px rgba(139,124,255,.08);
+}
+.profile-ring:before,.profile-ring:after{
+  content:"";position:absolute;border:1px dashed rgba(139,124,255,.5);border-radius:50%;
+}
+.profile-ring:before{inset:-28px;animation:spin 14s linear infinite}
+.profile-ring:after{inset:-55px;animation:spin 20s linear infinite reverse}
+.profile-initial{font-family:"Space Grotesk";font-size:5rem;font-weight:800;background:linear-gradient(135deg,var(--accent),var(--accent2));-webkit-background-clip:text;color:transparent}
+.tech-orbit{position:absolute;inset:0;animation:spin 22s linear infinite}
+.tech-orbit span{
+  position:absolute;padding:7px 10px;border:1px solid var(--line);background:rgba(5,8,16,.8);
+  border-radius:10px;font-size:.68rem;color:var(--muted);
+}
+.tech-orbit span:nth-child(1){top:18%;left:15%}
+.tech-orbit span:nth-child(2){top:15%;right:12%}
+.tech-orbit span:nth-child(3){bottom:17%;right:13%}
+.tech-orbit span:nth-child(4){bottom:15%;left:14%}
+
+/* Skills */
+.skills-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.skill-card{padding:25px;transition:transform .4s, border-color .4s}
+.skill-card:hover{transform:translateY(-8px) rotateX(2deg) rotateY(-2deg);border-color:rgba(101,231,255,.3)}
+.skill-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:18px}
+.skill-name{font-family:"Space Grotesk";font-weight:700}
+.skill-level{font-size:.72rem;color:var(--accent)}
+.bar{height:7px;border-radius:999px;background:rgba(255,255,255,.07);overflow:hidden}
+.bar span{display:block;height:100%;width:0;border-radius:inherit;background:linear-gradient(90deg,var(--accent),var(--accent2));box-shadow:0 0 15px rgba(101,231,255,.25);transition:width 1.3s cubic-bezier(.2,.8,.2,1)}
+.skill-desc{color:var(--muted);font-size:.78rem;line-height:1.65;margin-top:13px}
+
+/* Projects */
+.projects{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.project{
+  min-height:360px;padding:26px;position:relative;overflow:hidden;
+  transform-style:preserve-3d;transition:transform .15s ease,border-color .3s;
+}
+.project:before{
+  content:"";position:absolute;width:180px;height:180px;border-radius:50%;
+  background:radial-gradient(circle,rgba(101,231,255,.18),transparent 68%);
+  top:-80px;right:-60px;pointer-events:none;
+}
+.project:hover{border-color:rgba(101,231,255,.32)}
+.project-num{font-family:"Space Grotesk";font-size:.75rem;color:var(--accent)}
+.project h3{font-family:"Space Grotesk";font-size:1.5rem;margin:55px 0 12px}
+.project p{color:var(--muted);line-height:1.7;font-size:.87rem}
+.project-tags{display:flex;flex-wrap:wrap;gap:7px;margin-top:22px}
+.project-tags span{font-size:.68rem;color:#b8c5d9;padding:6px 9px;border:1px solid var(--line);border-radius:999px;background:rgba(255,255,255,.035)}
+.project-arrow{position:absolute;bottom:25px;right:25px;font-size:1.4rem;color:var(--accent);transform:translateZ(25px)}
+
+/* Education / Experience */
+.timeline{position:relative;max-width:900px;margin:auto}
+.timeline:before{content:"";position:absolute;left:15px;top:0;bottom:0;width:1px;background:linear-gradient(var(--accent),rgba(101,231,255,.05))}
+.timeline-item{position:relative;padding-left:55px;margin-bottom:25px}
+.timeline-dot{position:absolute;left:9px;top:26px;width:13px;height:13px;border-radius:50%;background:var(--accent);box-shadow:0 0 18px rgba(101,231,255,.65)}
+.timeline-card{padding:25px}
+.timeline-meta{font-size:.73rem;color:var(--accent);text-transform:uppercase;letter-spacing:.1em}
+.timeline-card h3{font-family:"Space Grotesk";font-size:1.2rem;margin:8px 0}
+.timeline-card p{color:var(--muted);line-height:1.7;font-size:.88rem}
+
+/* Contact */
+.contact-box{
+  padding:55px;display:grid;grid-template-columns:1.2fr .8fr;gap:40px;
+  position:relative;overflow:hidden;
+}
+.contact-box:after{
+  content:"";position:absolute;width:450px;height:450px;border-radius:50%;
+  background:radial-gradient(circle,rgba(139,124,255,.16),transparent 68%);
+  right:-160px;bottom:-260px;pointer-events:none;
+}
+.contact-box h2{max-width:650px}
+.contact-box p{color:var(--muted);line-height:1.8;margin:20px 0 25px;max-width:620px}
+.socials{display:grid;gap:12px;position:relative;z-index:2}
+.social{
+  padding:15px 17px;border:1px solid var(--line);border-radius:15px;
+  background:rgba(255,255,255,.035);transition:.3s;
+}
+.social:hover{transform:translateX(6px);border-color:rgba(101,231,255,.3)}
+.social small{display:block;color:var(--muted);font-size:.65rem;margin-bottom:4px}
+.social strong{font-size:.9rem}
+
+/* Footer */
+footer{padding:35px 0 55px;color:#69778d;font-size:.76rem;text-align:center}
+
+/* Reveal */
+.reveal{opacity:0;transform:translateY(35px);transition:opacity .8s ease,transform .8s ease}
+.reveal.show{opacity:1;transform:none}
+
+/* Back to top */
+#topBtn{
+  position:fixed;right:22px;bottom:22px;width:45px;height:45px;border-radius:50%;
+  border:1px solid var(--line);background:rgba(10,15,27,.8);color:var(--text);
+  display:grid;place-items:center;z-index:900;cursor:pointer;opacity:0;transform:translateY(20px);
+  transition:.3s;backdrop-filter:blur(10px)
+}
+#topBtn.show{opacity:1;transform:none}
+
+/* Animations */
+@keyframes float{50%{transform:translateY(-18px) rotateX(4deg) rotateY(-5deg)}}
+@keyframes float2{50%{transform:translateY(-10px)}}
+@keyframes spin{to{transform:rotateX(360deg) rotateY(360deg)}}
+@keyframes pulse{50%{transform:scale(1.12);opacity:.7}}
+
+/* Responsive */
+@media(max-width:950px){
+  .hero-grid,.about-grid,.contact-box{grid-template-columns:1fr}
+  .hero{padding-top:135px}
+  .scene{height:430px;order:-1}
+  .skills-grid,.projects{grid-template-columns:repeat(2,1fr)}
+}
+@media(max-width:720px){
+  body{cursor:auto}
+  .cursor,.cursor-dot{display:none}
+  .container{width:min(calc(100% - 28px),var(--max))}
+  section{padding:85px 0}
+  .nav{top:10px;width:calc(100% - 20px)}
+  .nav-links{
+    position:absolute;left:0;right:0;top:64px;display:none;flex-direction:column;
+    padding:10px;background:rgba(7,11,20,.96);border:1px solid var(--line);border-radius:16px;
+  }
+  .nav-links.open{display:flex}
+  .nav-links a{padding:13px}
+  .menu-btn{display:block}
+  .hero{min-height:auto;padding-top:125px}
+  .hero-grid{gap:20px}
+  .hero h1{font-size:clamp(3rem,16vw,5rem)}
+  .scene{height:330px}
+  .cube-wrap{transform:scale(.72)}
+  .floating-tag{font-size:.65rem}
+  .section-head{display:block}
+  .section-copy{margin-top:18px}
+  .skills-grid,.projects{grid-template-columns:1fr}
+  .profile-card{min-height:350px}
+  .contact-box{padding:30px 24px}
+  .mini-stats{gap:18px}
+}
+
+/* Reduced motion accessibility */
+@media(prefers-reduced-motion:reduce){
+  *,*:before,*:after{animation-duration:.001ms!important;animation-iteration-count:1!important;scroll-behavior:auto!important;transition-duration:.001ms!important}
+}
+</style>
+</head>
+
+<body>
+<div id="scrollProgress"></div>
+<div class="cursor"></div>
+<div class="cursor-dot"></div>
+
+<nav class="nav">
+  <div class="nav-inner">
+    <a href="#home" class="logo">H<span>.</span></a>
+    <button class="menu-btn" aria-label="Open navigation">☰</button>
+    <ul class="nav-links">
+      <li><a href="#home">Home</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="#skills">Skills</a></li>
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#education">Education</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </div>
+</nav>
+
+<main>
+<!-- ===================== HERO ===================== -->
+<section class="hero" id="home">
+  <div class="container hero-grid">
+    <div class="reveal">
+      <div class="kicker"><i></i> 3rd Year CSE Student • Developer</div>
+      <h1>Building the <span class="gradient">future</span><br>one idea at a time.</h1>
+      <p class="hero-text">
+        Hi, I'm <strong>Hemasri</strong> — a Computer Science Engineering student
+        passionate about programming, web development, problem solving and learning
+        new technologies.
+      </p>
+      <div class="cta-row">
+        <a class="btn primary" href="#projects">Explore My Work ↗</a>
+        <a class="btn" href="#contact">Let's Connect</a>
+        <button class="btn" id="downloadResume">↓ Download Resume</button>
+      </div>
+      <div class="mini-stats">
+        <div><strong>7.57</strong><span>Current CGPA</span></div>
+        <div><strong>3+</strong><span>Core Skills</span></div>
+        <div><strong>∞</strong><span>Learning Mode</span></div>
+      </div>
+    </div>
+
+    <div class="scene reveal">
+      <div class="orb"></div>
+      <div class="floating-tag tag1">HTML • CSS • JS</div>
+      <div class="floating-tag tag2">JAVA + PYTHON</div>
+      <div class="floating-tag tag3">PROBLEM SOLVING</div>
+      <div class="cube-wrap">
+        <div class="cube">
+          <div class="face front"><div class="cube-label">HEMASRI</div></div>
+          <div class="face back"></div>
+          <div class="face right"></div>
+          <div class="face left"></div>
+          <div class="face top"></div>
+          <div class="face bottom"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== ABOUT ===================== -->
+<section id="about">
+  <div class="container">
+    <div class="section-head reveal">
+      <div><div class="eyebrow">01 / About</div><h2>Curious mind.<br>Creative builder.</h2></div>
+      <p class="section-copy">I enjoy turning concepts into clean, useful digital experiences while continuously improving my technical skills.</p>
+    </div>
+
+    <div class="about-grid">
+      <div class="glass profile-card reveal">
+        <div class="tech-orbit">
+          <span>Java</span><span>Python</span><span>HTML/CSS</span><span>Web</span>
+        </div>
+        <div class="profile-ring"><div class="profile-initial">H</div></div>
+      </div>
+
+      <div class="glass about-card reveal">
+        <p>
+          I am a <strong>3rd year Computer Science Engineering student</strong> at
+          Dhanekula Institute of Engineering and Technology, Ganguru.
+        </p>
+        <p>
+          My interests include <strong>problem solving, creating web pages and
+          learning new technologies</strong>. I like exploring ideas, building
+          practical projects and understanding how technology can solve real-world problems.
+        </p>
+        <p>
+          I am currently strengthening my foundations in Java, Python, HTML and CSS,
+          while expanding toward modern web and full-stack development.
+        </p>
+        <div class="cta-row">
+          <a class="btn primary" href="#contact">Work With Me</a>
+          <a class="btn" href="#education">My Journey ↓</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== SKILLS ===================== -->
+<section id="skills">
+  <div class="container">
+    <div class="section-head reveal">
+      <div><div class="eyebrow">02 / Skills</div><h2>Tools I use<br>to create.</h2></div>
+      <p class="section-copy">A growing toolkit built through coursework, practice, projects and continuous learning.</p>
+    </div>
+
+    <div class="skills-grid">
+      <div class="glass skill-card reveal" data-level="72">
+        <div class="skill-top"><span class="skill-name">Java</span><span class="skill-level">Intermediate</span></div>
+        <div class="bar"><span></span></div>
+        <p class="skill-desc">Object-oriented programming, logic building and application fundamentals.</p>
+      </div>
+      <div class="glass skill-card reveal" data-level="70">
+        <div class="skill-top"><span class="skill-name">Python</span><span class="skill-level">Intermediate</span></div>
+        <div class="bar"><span></span></div>
+        <p class="skill-desc">Problem solving, scripting and a foundation for automation and data work.</p>
+      </div>
+      <div class="glass skill-card reveal" data-level="76">
+        <div class="skill-top"><span class="skill-name">HTML & CSS</span><span class="skill-level">Intermediate</span></div>
+        <div class="bar"><span></span></div>
+        <p class="skill-desc">Responsive layouts, modern UI styling and interactive web interfaces.</p>
+      </div>
+      <div class="glass skill-card reveal" data-level="62">
+        <div class="skill-top"><span class="skill-name">JavaScript</span><span class="skill-level">Growing</span></div>
+        <div class="bar"><span></span></div>
+        <p class="skill-desc">DOM manipulation, events and interactive front-end experiences.</p>
+      </div>
+      <div class="glass skill-card reveal" data-level="64">
+        <div class="skill-top"><span class="skill-name">Problem Solving</span><span class="skill-level">Growing</span></div>
+        <div class="bar"><span></span></div>
+        <p class="skill-desc">Logical thinking and breaking complex problems into manageable steps.</p>
+      </div>
+      <div class="glass skill-card reveal" data-level="58">
+        <div class="skill-top"><span class="skill-name">Git & GitHub</span><span class="skill-level">Learning</span></div>
+        <div class="bar"><span></span></div>
+        <p class="skill-desc">Version control and deploying projects for an online portfolio.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== PROJECTS ===================== -->
+<section id="projects">
+  <div class="container">
+    <div class="section-head reveal">
+      <div><div class="eyebrow">03 / Projects</div><h2>Ideas into<br>experiences.</h2></div>
+      <p class="section-copy">Selected project concepts that demonstrate my interest in practical software, web experiences and emerging technology.</p>
+    </div>
+
+    <div class="projects">
+      <article class="glass project reveal">
+        <span class="project-num">PROJECT / 01</span>
+        <h3>Network Intrusion Detection</h3>
+        <p>A machine-learning based web interface for analysing network traffic and identifying potential intrusion patterns.</p>
+        <div class="project-tags"><span>Python</span><span>ML</span><span>Streamlit</span><span>Cybersecurity</span></div>
+        <span class="project-arrow">↗</span>
+      </article>
+
+      <article class="glass project reveal">
+        <span class="project-num">PROJECT / 02</span>
+        <h3>3D Developer Portfolio</h3>
+        <p>An interactive portfolio concept combining responsive UI, CSS 3D transforms, animation and JavaScript interactions.</p>
+        <div class="project-tags"><span>HTML</span><span>CSS</span><span>JavaScript</span><span>3D UI</span></div>
+        <span class="project-arrow">↗</span>
+      </article>
+
+      <article class="glass project reveal">
+        <span class="project-num">PROJECT / 03</span>
+        <h3>Secure Aadhaar-Mobile Linking</h3>
+        <p>A community-focused project concept exploring OTP-based authentication and awareness around secure Aadhaar-mobile linking.</p>
+        <div class="project-tags"><span>OTP</span><span>Authentication</span><span>SDG</span><span>Community</span></div>
+        <span class="project-arrow">↗</span>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== EDUCATION ===================== -->
+<section id="education">
+  <div class="container">
+    <div class="section-head reveal">
+      <div><div class="eyebrow">04 / Journey</div><h2>Education &<br>experience.</h2></div>
+      <p class="section-copy">A snapshot of my academic journey and the foundation behind my development path.</p>
+    </div>
+
+    <div class="timeline">
+      <div class="timeline-item reveal">
+        <span class="timeline-dot"></span>
+        <div class="glass timeline-card">
+          <div class="timeline-meta">2024 — Present • Ganguru</div>
+          <h3>Dhanekula Institute of Engineering and Technology</h3>
+          <p>B.Tech — Computer Science Engineering • 3rd Year • Current CGPA: <strong>7.57</strong></p>
+        </div>
+      </div>
+
+      <div class="timeline-item reveal">
+        <span class="timeline-dot"></span>
+        <div class="glass timeline-card">
+          <div class="timeline-meta">2022 — 2024</div>
+          <h3>Sri Chaitanya Jr College</h3>
+          <p>Intermediate • <strong>78%</strong></p>
+        </div>
+      </div>
+
+      <div class="timeline-item reveal">
+        <span class="timeline-dot"></span>
+        <div class="glass timeline-card">
+          <div class="timeline-meta">Completed 2022</div>
+          <h3>Gollapalli Ramakrishna School</h3>
+          <p>Secondary School Certificate • <strong>75%</strong></p>
+        </div>
+      </div>
+
+      <div class="timeline-item reveal">
+        <span class="timeline-dot"></span>
+        <div class="glass timeline-card">
+          <div class="timeline-meta">Continuous Learning</div>
+          <h3>Developer Growth</h3>
+          <p>Building skills through programming courses, web development practice, personal projects and hands-on experimentation.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== CONTACT ===================== -->
+<section id="contact">
+  <div class="container">
+    <div class="glass contact-box reveal">
+      <div>
+        <div class="eyebrow">05 / Contact</div>
+        <h2>Let's build something<br><span class="gradient">worth remembering.</span></h2>
+        <p>
+          Have an opportunity, project idea or collaboration in mind?
+          I'd love to connect, learn and create something meaningful.
+        </p>
+        <div class="cta-row">
+          <a class="btn primary" href="mailto:hemasrigdsouza@gmail.com">Email Me ↗</a>
+          <a class="btn" href="tel:7013127445">Call Me</a>
+        </div>
+      </div>
+
+      <div class="socials">
+        <!-- Replace these two generic links with your exact profile URLs -->
+        <a class="social" href="https://www.linkedin.com/" target="_blank" rel="noopener">
+          <small>LINKEDIN</small><strong>Gurrala Hemasri ↗</strong>
+        </a>
+        <a class="social" href="https://github.com/" target="_blank" rel="noopener">
+          <small>GITHUB</small><strong>Gurrala Hemasri ↗</strong>
+        </a>
+        <a class="social" href="mailto:hemasrigdsouza@gmail.com">
+          <small>EMAIL</small><strong>hemasrigdsouza@gmail.com ↗</strong>
+        </a>
+        <a class="social" href="tel:7013127445">
+          <small>PHONE</small><strong>+91 70131 27445 ↗</strong>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer>
+  © <span id="year"></span> Hemasri. Designed & built with HTML, CSS & JavaScript.
+</footer>
+
+<button id="topBtn" aria-label="Back to top">↑</button>
+
+<script>
+/* =========================================================
+   JavaScript interactions
+   ========================================================= */
+
+const $ = (selector, parent=document) => parent.querySelector(selector);
+const $$ = (selector, parent=document) => [...parent.querySelectorAll(selector)];
+
+/* Mobile navigation */
+const menuBtn = $('.menu-btn');
+const navLinks = $('.nav-links');
+menuBtn.addEventListener('click', () => navLinks.classList.toggle('open'));
+$$('.nav-links a').forEach(link => link.addEventListener('click', () => navLinks.classList.remove('open')));
+
+/* Scroll progress + back-to-top */
+const progress = $('#scrollProgress');
+const topBtn = $('#topBtn');
+
+function updateScrollUI(){
+  const scrollTop = window.scrollY;
+  const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+  progress.style.width = (docHeight > 0 ? scrollTop / docHeight * 100 : 0) + '%';
+  topBtn.classList.toggle('show', scrollTop > 500);
+}
+window.addEventListener('scroll', updateScrollUI, {passive:true});
+topBtn.addEventListener('click', () => window.scrollTo({top:0, behavior:'smooth'}));
+
+/* Scroll reveal */
+const revealObserver = new IntersectionObserver(entries => {
+  entries.forEach(entry => {
+    if(entry.isIntersecting){
+      entry.target.classList.add('show');
+      revealObserver.unobserve(entry.target);
+    }
+  });
+}, {threshold:.12});
+$$('.reveal').forEach(el => revealObserver.observe(el));
+
+/* Animated skill bars */
+const skillObserver = new IntersectionObserver(entries => {
+  entries.forEach(entry => {
+    if(entry.isIntersecting){
+      const level = entry.target.dataset.level;
+      $('.bar span', entry.target).style.width = level + '%';
+      skillObserver.unobserve(entry.target);
+    }
+  });
+}, {threshold:.35});
+$$('.skill-card').forEach(el => skillObserver.observe(el));
+
+/* Active navigation */
+const sections = $$('main section[id]');
+const navAnchors = $$('.nav-links a');
+
+const activeObserver = new IntersectionObserver(entries => {
+  entries.forEach(entry => {
+    if(entry.isIntersecting){
+      navAnchors.forEach(a => a.classList.remove('active'));
+      const active = $('.nav-links a[href="#' + entry.target.id + '"]');
+      if(active) active.classList.add('active');
+    }
+  });
+}, {rootMargin:'-35% 0px -55% 0px'});
+sections.forEach(s => activeObserver.observe(s));
+
+/* Premium custom cursor on desktop */
+const cursor = $('.cursor');
+const dot = $('.cursor-dot');
+let mouseX = innerWidth/2, mouseY = innerHeight/2;
+let cursorX = mouseX, cursorY = mouseY;
+
+window.addEventListener('mousemove', e => {
+  mouseX = e.clientX; mouseY = e.clientY;
+  dot.style.left = mouseX + 'px';
+  dot.style.top = mouseY + 'px';
+});
+
+function animateCursor(){
+  cursorX += (mouseX - cursorX) * .14;
+  cursorY += (mouseY - cursorY) * .14;
+  cursor.style.left = cursorX + 'px';
+  cursor.style.top = cursorY + 'px';
+  requestAnimationFrame(animateCursor);
+}
+animateCursor();
+
+$$('a,button,.project,.skill-card').forEach(el => {
+  el.addEventListener('mouseenter', () => cursor.classList.add('active'));
+  el.addEventListener('mouseleave', () => cursor.classList.remove('active'));
+});
+
+/* 3D project tilt */
+$$('.project').forEach(card => {
+  card.addEventListener('mousemove', e => {
+    if(innerWidth < 800) return;
+    const rect = card.getBoundingClientRect();
+    const x = (e.clientX - rect.left) / rect.width;
+    const y = (e.clientY - rect.top) / rect.height;
+    const rotateY = (x - .5) * 10;
+    const rotateX = (.5 - y) * 10;
+    card.style.transform = `perspective(800px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(-5px)`;
+  });
+  card.addEventListener('mouseleave', () => card.style.transform = '');
+});
+
+/* Subtle hero parallax */
+const scene = $('.scene');
+window.addEventListener('mousemove', e => {
+  if(innerWidth < 900) return;
+  const x = (e.clientX / innerWidth - .5) * 10;
+  const y = (e.clientY / innerHeight - .5) * 10;
+  scene.style.transform = `translate3d(${x}px,${y}px,0)`;
+}, {passive:true});
+
+/* Resume download:
+   Generates a lightweight printable HTML resume from the portfolio data.
+   You can later replace this button with your real PDF file if desired. */
+$('#downloadResume').addEventListener('click', () => {
+  const resume = `<!doctype html>
+<html><head><meta charset="utf-8"><title>Hemasri - Resume</title>
+<style>
+body{font-family:Arial,sans-serif;max-width:800px;margin:50px auto;line-height:1.6;color:#20242c}
+h1{margin-bottom:4px}h2{border-bottom:1px solid #ddd;padding-bottom:6px;margin-top:28px}
+.small{color:#667085}.item{margin:14px 0}.right{float:right}
+</style></head><body>
+<h1>HEMASRI</h1><div class="small">3rd Year CSE Student | Vijayawada</div>
+<p>Email: hemasrigdsouza@gmail.com<br>Phone: +91 70131 27445</p>
+<h2>Education</h2>
+<div class="item"><b>Dhanekula Institute of Engineering and Technology</b><span class="right">7.57 CGPA</span><br>3rd Year CSE • Ganguru</div>
+<div class="item"><b>Sri Chaitanya Jr College</b><span class="right">78%</span><br>Intermediate • 2022–2024</div>
+<div class="item"><b>Gollapalli Ramakrishna School</b><span class="right">75%</span><br>SSC • 2022</div>
+<h2>Skills</h2><p><b>Java</b> — Intermediate<br><b>Python</b> — Intermediate<br><b>HTML & CSS</b> — Intermediate<br><b>JavaScript</b> — Growing<br><b>Git & GitHub</b> — Learning</p>
+<h2>Interests</h2><p>Problem solving • Creating web pages • Learning new technologies</p>
+<h2>Languages</h2><p>Telugu • English • Hindi</p>
+</body></html>`;
+  const blob = new Blob([resume], {type:'text/html'});
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url; a.download = 'Hemasri_Resume.html';
+  document.body.appendChild(a); a.click(); a.remove();
+  URL.revokeObjectURL(url);
+});
+
+/* Footer year */
+$('#year').textContent = new Date().getFullYear();
+updateScrollUI();
+</script>
+</body>
+</html>
